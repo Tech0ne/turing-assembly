@@ -1,0 +1,59 @@
+============= Values =============
+
+x : hexa value defining a number in lowarcase
+r[x] : Register at index [x]
+${name} : Named register (need to be defined)
+
+============= Instructions =============
+
+//specials
+
+r[x], {name} : define a name for a register (see below)
+/ : comment
+
+// Normals
+
+0, {r}, [x, optional, default 1] => set register {r}'s current index bit (and x-1 after) to 0
+1, {r}, [x, optional, default 1] => set register {r}'s current index bit (and x-1 after) to 1
+!, {r} => invert {r}'s current index bit
+
+<, {r}, [x, optional, default 1] => move the {r}'s register index to the left [x] times
+>, {r}, [x, optional, default 1] => move the {r}'s register index to the right [x] times
+
+// If statement
+?, {r} => continue if {r}' current index bit is 1.
+: => if not, go after this semi-colon (non-required)
+; => end of if statement
+
+%, {r1}, {r2}, [x] => copy [x] bits from register r1 to register r2
+
+*, {r1}, {r2}, {r3} => operate a bitwise AND between {r1}'s current index bit and {r2}'s current index. Save the output to {r3}'s current index bit
++, {r1}, {r2}, {r3} => operate a bitwise OR between {r1}'s current index bit and {r2}'s current index. Save the output to {r3}'s current index bit
+
+c, {function_name}, function_arg_1, function_arg_2, function_arg_3, function_arg_4 => call function from a lib. 4 args at most. Each arg will be a "char" (8 bits long). Interpret as u like (register, value...)
+x, {r1} => call ribbon {r1} as a program (will return after a 0000 instruction)
+
+PROGRAM ENDS WITH 0000
+
+0 => 0001
+1 => 0010
+! => 0011
+< => 0100
+> => 0101
+? => 0110
+: => 0111
+; => 1000
+% => 1001
+* => 1010
++ => 1011
+c => 1100
+x => 1101
+
+============= NOTES =============
+
+- Default names "inst" and "data" are already set, respectivly, to r0 and r1
+- You can't use a register without the previous set
+
+WARNINGS SKIP LINES !!!
+
+THIS WILL BE FULL BIG ENDIAN
