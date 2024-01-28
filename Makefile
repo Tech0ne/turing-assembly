@@ -95,3 +95,6 @@ push: 				cs
 	@$(ECHO) -n "Commit message > "
 	@read message; git commit -m "$$message"
 	@git push
+
+flow:
+	cflow --tree --number $(SRC)

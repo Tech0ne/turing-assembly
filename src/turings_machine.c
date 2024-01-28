@@ -23,12 +23,20 @@ void clear_bit(turing_ribbon *ribbon)
 
 void repr_ribbon(turing_ribbon *ribbon)
 {
+    printf("== Repr ribbon ==\n");
+    printf("- Pos : %i\n- Size : %i\n", ribbon->pos, ribbon->size);
     int initial_pos = ribbon->pos;
     ribbon->pos = 0;
-    printf("%i", get_bit(ribbon));
+    if (!initial_pos)
+        printf("{%i}", get_bit(ribbon));
+    else
+        printf("%i", get_bit(ribbon));
     for (int i = 1; i < (int)(ribbon->size * 8); i++) {
         ribbon->pos += 1;
-        printf(" %i", get_bit(ribbon));
+        if (i == initial_pos)
+            printf(" {%i}", get_bit(ribbon));
+        else
+            printf(" %i", get_bit(ribbon));
     }
     printf("\n");
     ribbon->pos = initial_pos;
@@ -69,9 +77,11 @@ void add_bits(turing_ribbon *ribbon, char *bitarray, short offset, int amount)
 
 void add_inst(turing_ribbon *ribbon, instruction_id instruction)
 {
-    char inst = (char)instruction;
-    add_bits(ribbon, &inst, 0, 4);
-    repr_ribbon(ribbon);
+    for (int i = 0; i < 4; i++) {
+        if ((instruction & (1 << i)) != 0) set_bit(ribbon);
+        else clear_bit(ribbon);
+        ribbon->pos += 1;
+    }
 }
 
 void add_int(turing_ribbon *ribbon, int value)

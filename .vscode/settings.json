@@ -4,5 +4,6 @@
         "h_types.h": "c",
         "h_headers.h": "c",
         "stdio.h": "c"
-    }
+    },
+    "C_Cpp.default.compilerPath": "/usr/bin/gcc"
 }

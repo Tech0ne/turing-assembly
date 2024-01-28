@@ -8,7 +8,7 @@
 // PLEASE NOTE THAT IF YOU CHANGE SOME OF THESE LIMITS, YOU MIGHT HAVE TO CHANGE IN-CODE IMPLEMENTATIONS !!!
 
 // Max bits per ribbon
-#define MAX_RIBBON_SIZE 8192
+#define MAX_RIBBON_SIZE 1024
 
 // Max ribbons
 #define MAX_RIBBONS 256 // This means the biggest ribbon will be rff (ribbon number 255)

@@ -10,7 +10,7 @@
 typedef struct turing_ribbon {
     char *ribbon;
     int pos;
-    unsigned size;
+    size_t size;
 } turing_ribbon;
 
 typedef struct alias {

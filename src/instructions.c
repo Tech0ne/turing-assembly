@@ -60,6 +60,7 @@ void inst_set_bit(int line_count, char **tokens, m_list aliases, turing_ribbon *
 
     int reg = get_ribbon(tokens[1], aliases);
     int val = (nb_tokens == 2) ? 1 : my_getnbr_base(tokens[2], "0123456789abcdef");
+    printf("%i; %i\n", reg, val);
     if (reg == -1 || val == -1) {
         my_printf("WARNING: L.%i;b:0123456789abcdef%: Could not read an argument\n", line_count);
         return;
@@ -67,4 +68,5 @@ void inst_set_bit(int line_count, char **tokens, m_list aliases, turing_ribbon *
     add_inst(ribbon, (tokens[0][0] == '0') ? CLEAR_BIT : SET_BIT);
     add_int(ribbon, reg);
     add_int(ribbon, val);
+    repr_ribbon(ribbon);
 }
